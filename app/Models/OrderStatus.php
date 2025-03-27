@@ -5,24 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class OrderStatus extends Model
 {
     use HasFactory;
 
     // Indicar el nombre de la tabla
-    protected $table = '_user';
+    protected $table = '_order_status';
 
     // Los campos que se pueden asignar masivamente
     protected $fillable = [
-        'role_id',
-        'Name',
-        'Email',
-        'Password',
+        'Status',
     ];
 
-    // Relación con el modelo Role
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
 }
