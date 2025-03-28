@@ -78,4 +78,12 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Pedido eliminado correctamente');
     }
+
+    // OrderController.php
+    public function show($id)
+{
+    $order = Order::with('products')->findOrFail($id); // Eager loading de productos
+
+    return view('orders.show', compact('order'));
+}
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 
 
@@ -20,4 +21,7 @@ Route::resource('orders', OrderController::class);
 Route::resource('orderStatus', OrderStatusController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+Route::resource('products', ProductController::class);
+Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 

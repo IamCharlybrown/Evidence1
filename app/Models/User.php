@@ -9,10 +9,8 @@ class User extends Model
 {
     use HasFactory;
 
-    // Indicar el nombre de la tabla
     protected $table = '_user';
 
-    // Los campos que se pueden asignar masivamente
     protected $fillable = [
         'role_id',
         'Name',
@@ -20,9 +18,14 @@ class User extends Model
         'Password',
     ];
 
-    // Relación con el modelo Role
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    // Relación con productos creados por el usuario
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'Created_By');
     }
 }

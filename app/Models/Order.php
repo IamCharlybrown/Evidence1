@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 class Order extends Model
 {
     use HasFactory;
 
-    // Indicar el nombre de la tabla
     protected $table = '_order';
 
-    // Los campos que se pueden asignar masivamente
     protected $fillable = [
         'Client_ID',
         'Status_ID',
@@ -22,21 +21,29 @@ class Order extends Model
         'Delivery_Photo_ID',
     ];
 
-    // Relación con el modelo Client
+    // Relación con el cliente
     public function client()
     {
         return $this->belongsTo(Client::class, 'Client_ID');
     }
 
-    // Relación con el modelo OrderStatus
+    // Relación con el estado del pedido
     public function status()
     {
         return $this->belongsTo(OrderStatus::class, 'Status_ID');
     }
 
-    // Relación con el modelo DeliveryPhoto
+    // Relación con la foto de entrega
     public function deliveryPhoto()
     {
         return $this->belongsTo(DeliveryPhoto::class, 'Delivery_Photo_ID');
+    }
+
+    // Relación con productos (muchos a muchos)
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, '_order_product', 'Order_ID', 'Product_ID')
+                    ->withPivot('Quantity')
+                    ->withTimestamps();
     }
 }
